@@ -9,7 +9,6 @@
 //Including the Liabaries
 #include <ESP8266_Lib.h>
 #include <BlynkSimpleShieldEsp8266.h>
-#include <Blynk.h>
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
@@ -29,6 +28,43 @@ SoftwareSerial EspSerial(2, 3); // RX, TX
 ESP8266 wifi(&EspSerial);
 
 //For Desktop Dashboard Blynk
+BLYNK_WRITE(V0) //Listening V0 Pin...
+{
+  int pinValue = param.asInt();
+
+  if(pinValue == 1){
+    digitalWrite(4,HIGH);
+    //do something when button is pressed (Open the LED)
+    } 
+  
+  else if (pinValue == 0){
+    digitalWrite(4,LOW);
+    //do something else when button is pressed (Close the LED)
+  }
+  Serial.print("V0 Button value is: "); //Print value output to COM output
+  Serial.println(pinValue);  
+}
+
+
+//For Mobile Dashboard Blynk
+BLYNK_WRITE(V1) // Listening V1 Pin ....
+
+{
+  int pinValue = param.asInt(); //Assigning Incoming Value from V1 pin as variable
+
+  if(pinValue == 1){
+    digitalWrite(4,HIGH);
+    //do something when button is pressed (Open the LED)
+    } 
+  
+  else if (pinValue == 0){
+    digitalWrite(4,LOW);
+    //do something else when button is pressed (Close the LED)
+  }
+
+  Serial.print("V1 Button value is: "); //Print value output to COM output
+  Serial.println(pinValue);
+}
 
 void setup()
 
@@ -44,45 +80,6 @@ void setup()
 
   Blynk.begin(BLYNK_AUTH_TOKEN, wifi, ssid, pass);
 }
-
-BLYNK_WRITE(V0) //Listening V0 Pin...
-{
-  int pinValue = param.asInt();
-
-  if(pinValue == 0){
-    digitalWrite(4,LOW);
-    //do something when button is pressed (Open the LED)
-    } 
-  
-  else if (pinValue == 1){
-    digitalWrite(4,HIGH);
-    //do something else when button is pressed (Close the LED)
-  }
-  Serial.print("V0 Button value is: "); //Print value output to COM output
-  Serial.println(pinValue);  
-}
-
-
-//For Mobile Dashboard Blynk
-BLYNK_WRITE(V1) // Listening V1 Pin ....
-
-{
-  int pinValue = param.asInt(); //Assigning Incoming Value from V1 pin as variable
-
-  if(pinValue == 0){
-    digitalWrite(4,LOW);
-    //do something when button is pressed (Open the LED)
-    } 
-  
-  else if (pinValue == 1){
-    digitalWrite(4,HIGH);
-    //do something else when button is pressed (Close the LED)
-  }
-
-  Serial.print("V1 Button value is: "); //Print value output to COM output
-  Serial.println(pinValue);
-}
-
 
 void loop()
 {
