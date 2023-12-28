@@ -15,14 +15,17 @@ void loop() {
   PIRstate = digitalRead(PIRpin);   // read the state of the pushbutton value:
 
   // check if the PIR sensor is triggered. If it is, the PIRstate is HIGH:
-  if (PIRstate == HIGH) {
+  if (PIRstate == 0) {
+    digitalWrite(4,LOW);
+    }
+  
+  // check if the PIR sensor is triggered. If it is, the PIRstate is HIGH:
+  if (PIRstate == 1) {
     digitalWrite(4,HIGH);
     }
 
-
    }
 
-  }
 
 
   
