@@ -1,8 +1,6 @@
 #include <SoftwareSerial.h>
 #include <ESP8266_Lib.h>
 
-// Additonal Libary for Blynk
-
 SoftwareSerial EspSerial(2, 3); // RX, TX
 
 // Your ESP8266 baud rate:

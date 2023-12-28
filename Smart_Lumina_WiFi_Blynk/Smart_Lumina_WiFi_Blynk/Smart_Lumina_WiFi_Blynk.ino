@@ -33,16 +33,23 @@ ESP8266 wifi(&EspSerial);
 //For Desktop Dashboard Blynk
 BLYNK_WRITE(V0) //Listening V0 Pin...
 {
-  int pinValue = param.asInt();
+  int pinValue = param.asInt(); //Assigning Incoming Value from V1 pin as variable
 
-  digitalWrite(LED, pinValue);
+  if(pinValue == 1){
+    digitalWrite(4,HIGH);
+    //do something when button is pressed (Open the LED)
+    } 
+  else if (pinValue == 0){
+    digitalWrite(4,LOW);
+    //do something else when button is pressed (Close the LED)
+  } 
+
+  Serial.print("V0 Button value is: "); //Print value output to COM output
+  Serial.println(pinValue);
 }
 
 void setup()
-{
-  //LED as output
-  pinMode(LED, OUTPUT);
-  
+{ 
   // Debug console
   Serial.begin(9600);
 
@@ -57,6 +64,7 @@ void setup()
 
 
 //For Mobile Dashboard Blynk
+
 BLYNK_WRITE(V1) // Listening V1 Pin ....
 {
   int pinValue = param.asInt(); //Assigning Incoming Value from V1 pin as variable
@@ -70,7 +78,7 @@ BLYNK_WRITE(V1) // Listening V1 Pin ....
     digitalWrite(4,LOW);
     //do something else when button is pressed (Close the LED)
   }
-
+  
   Serial.print("V1 Button value is: "); //Print value output to COM output
   Serial.println(pinValue);
 }
