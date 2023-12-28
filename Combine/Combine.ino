@@ -23,7 +23,7 @@ char pass[] = "Abc2823356";
 SoftwareSerial EspSerial(8, 9); // RX, TX
 
 // Your ESP8266 baud rate:
-#define ESP8266_BAUD 9600
+#define ESP8266_BAUD 115200
 
 ESP8266 wifi(&EspSerial);
 
