@@ -30,7 +30,7 @@ ESP8266 wifi(&EspSerial);
 //For Desktop Dashboard Blynk
 BLYNK_WRITE(V0) //Listening V0 Pin...
 {
-  int pinValue = param.asInt();
+  int pinValue = param.asInt(); //Assigning Incoming Value from V1 pin as variable
 
   if(pinValue == 1){
     digitalWrite(4,HIGH);
@@ -44,7 +44,6 @@ BLYNK_WRITE(V0) //Listening V0 Pin...
   Serial.print("V0 Button value is: "); //Print value output to COM output
   Serial.println(pinValue);  
 }
-
 
 //For Mobile Dashboard Blynk
 BLYNK_WRITE(V1) // Listening V1 Pin ....
@@ -66,9 +65,19 @@ BLYNK_WRITE(V1) // Listening V1 Pin ....
   Serial.println(pinValue);
 }
 
-void setup()
 
-{  
+
+//Alternative way activating the Lights. (Montion Sensor)
+int PIRpin = 5;                     // choose the input pin (for PIR sensor)
+int PIRstate = 0;                   // we start, assuming no motion detected
+int LED = 4;                        // LED
+
+
+
+void setup() {
+  pinMode(PIRpin, INPUT);           // initialize the PIR sensor pin as an input:
+  pinMode(LED, OUTPUT);             // initialize the LED as output:
+  
   // Debug console
   Serial.begin(9600);
 
@@ -81,7 +90,17 @@ void setup()
   Blynk.begin(BLYNK_AUTH_TOKEN, wifi, ssid, pass);
 }
 
-void loop()
-{
-  Blynk.run();
-}
+void loop() {
+  PIRstate = digitalRead(PIRpin);   // read the state of the pushbutton value:
+  
+  // check if the PIR sensor is triggered. If it is, the PIRstate is HIGH:
+  if (PIRstate == HIGH) {
+  digitalWrite(4,HIGH);
+
+  Blynk.run(); //Run the Blynk API
+
+
+    }
+
+  
+   }
