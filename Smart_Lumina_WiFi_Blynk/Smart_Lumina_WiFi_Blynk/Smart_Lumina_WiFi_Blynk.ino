@@ -4,11 +4,13 @@
 //Blynk Project ID and Name
 #define BLYNK_TEMPLATE_ID "TMPL6tChNVtDt"
 #define BLYNK_TEMPLATE_NAME "Group 7 Coms"
-#define BLYNK_AUTH_TOKEN "yrzsynusKduzjL6yXeZ0p-byRID2vSkd"
 
 //Including the Liabaries
 #include <ESP8266_Lib.h>
 #include <BlynkSimpleShieldEsp8266.h>
+
+//Blynk Auth Code
+char auth[] = "yrzsynusKduzjL6yXeZ0p-byRID2vSkd";
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
@@ -59,7 +61,7 @@ void setup()
   EspSerial.begin(ESP8266_BAUD);
   delay(10);
 
-  Blynk.begin(BLYNK_AUTH_TOKEN, wifi, ssid, pass);
+  Blynk.begin(auth, wifi, ssid, pass);
 }
 
 

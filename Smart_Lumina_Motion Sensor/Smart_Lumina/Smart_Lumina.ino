@@ -3,7 +3,8 @@ int PIRpin = 5;                     // choose the input pin (for PIR sensor)
 int PIRstate = 0;                   // we start, assuming no motion detected
 int LED = 4;                        // LED
 
-
+// Variable to hold the system state
+bool isOn = false;
 
 void setup() {
   pinMode(PIRpin, INPUT);           // initialize the PIR sensor pin as an input:
@@ -12,17 +13,24 @@ void setup() {
 }
 
 void loop() {
-  PIRstate = digitalRead(PIRpin);   // read the state of the pushbutton value:
-
-  // check if the PIR sensor is triggered. If it is, the PIRstate is HIGH:
-  if (PIRstate == HIGH) {
-    digitalWrite(4,HIGH);
-    }
-
-
-   }
-
+  int pirValue = digitalRead(5);
+  
+  // If the PIR sensor is triggered, toggle the state is it on or not.
+  if(pirValue == HIGH) {
+    isOn = !isOn;
+    
+    // Update the LED state
+    digitalWrite(LED, isOn ? HIGH : LOW);
+    
+    // Wait for the PIR sensor to reset
+    delay(5000);
   }
+}
+
+  
+
+
+  
 
 
   
