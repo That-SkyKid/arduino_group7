@@ -1,3 +1,6 @@
+//This code is for UNO Maker and ESP8266 Shield by Cytron, not expected to work on other devices.
+
+
 //Print Blynk Output
 #define BLYNK_PRINT Serial
 
@@ -14,8 +17,8 @@ char auth[] = "yrzsynusKduzjL6yXeZ0p-byRID2vSkd";
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-char ssid[] = "Alvin健业";
-char pass[] = "Abc2823356";
+char ssid[] = "UTS-Hostel";
+char pass[] = "Hostel@2019";
 
 // Hardware Serial on ESP8266 Shield
 #define EspSerial Serial1
@@ -27,8 +30,6 @@ SoftwareSerial EspSerial(8, 9); // RX, TX
 // Your ESP8266 baud rate:
 #define ESP8266_BAUD 9600
 
-//Define LED on PIN 4
-#define LED 4
 
 ESP8266 wifi(&EspSerial);
 
@@ -48,20 +49,6 @@ BLYNK_WRITE(V0) //Listening V0 Pin...
 
   Serial.print("V0 Button value is: "); //Print value output to COM output
   Serial.println(pinValue);
-}
-
-void setup()
-{ 
-  // Debug console
-  Serial.begin(9600);
-
-  delay(10);
-
-  // Set ESP8266 baud rate
-  EspSerial.begin(ESP8266_BAUD);
-  delay(10);
-
-  Blynk.begin(auth, wifi, ssid, pass);
 }
 
 
@@ -85,7 +72,21 @@ BLYNK_WRITE(V1) // Listening V1 Pin ....
   Serial.println(pinValue);
 }
 
-void loop()
+void setup()
+{ 
+  // Debug console
+  Serial.begin(9600);
+
+  delay(10);
+
+  // Set ESP8266 baud rate
+  EspSerial.begin(ESP8266_BAUD);
+  delay(10);
+
+  Blynk.begin(auth, wifi, ssid, pass); //Initiate the Blynk API
+}
+
+void loop() 
 {
-  Blynk.run();
+  Blynk.run(); //Run the Blynk API
 }
