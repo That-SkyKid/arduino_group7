@@ -23,7 +23,7 @@ char pass[] = "Hostel@2019";
 // Hardware Serial on ESP8266 Shield
 #define EspSerial Serial1
 
-// Software Serial on UNO Maker
+// Software Serial on ESP
 #include <SoftwareSerial.h>
 SoftwareSerial EspSerial(8, 9); // RX, TX
 
